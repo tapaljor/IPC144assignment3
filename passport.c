@@ -12,7 +12,7 @@ C CODE
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#define MAX_APPLICATION 10 
+#define MAX_APPLICATION 3 
 #define NAME_SIZE 200
 
 typedef struct passport {
@@ -145,17 +145,17 @@ void displayData(const Passport *data[]) {
 
     unsigned int serialNo = 1;
 
-    printf("%-3s%-20s%-20s%-20s%2s\n", "---", "---------", "----------", "----------", "---");
-    printf("%-3s%-20s%-20s%-20s%2s\n", "#", "ID", "First Name", "Last Name", "Age");
-    printf("%-3s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
+    printf("%-5s%-20s%-20s%-20s%2s\n", "---", "---------", "----------", "----------", "---");
+    printf("%-5s%-20s%-20s%-20s%2s\n", "#", "ID", "First Name", "Last Name", "Age");
+    printf("%-5s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
     for(size_t a = 0; a < MAX_APPLICATION; a++) {
-        printf("%-3d%-20lu%-20s%-20s%2u\n", serialNo++, data[a]->id,
+        printf("%-5d%-20lu%-20s%-20s%2u\n", serialNo++, data[a]->id,
                                          data[a]->firstName, 
                                          data[a]->lastName, 
                                          data[a]->age
                                          );
     }
-    printf("%-3s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
+    printf("%-5s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
 }
 void freeMemory(Passport *data[]) {
 
