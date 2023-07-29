@@ -19,7 +19,7 @@ typedef struct passport {
     unsigned long int id;
     char *firstName;
     char *lastName;
-    unsigned long int age;
+    unsigned int age;
 } Passport;
 
 void allocateMemory(Passport *data[]);
@@ -149,7 +149,7 @@ void displayData(const Passport *data[]) {
     printf("%-3s%-20s%-20s%-20s%2s\n", "#", "ID", "First Name", "Last Name", "Age");
     printf("%-3s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
     for(size_t a = 0; a < MAX_APPLICATION; a++) {
-        printf("%-3d%-20lu%-20s%-20s%2d\n", serialNo++, data[a]->id,
+        printf("%-3d%-20lu%-20s%-20s%2u\n", serialNo++, data[a]->id,
                                          data[a]->firstName, 
                                          data[a]->lastName, 
                                          data[a]->age
