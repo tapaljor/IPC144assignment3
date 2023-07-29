@@ -12,7 +12,7 @@ C CODE
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#define MAX_APPLICATION 3 
+#define MAX_APPLICATION 10 
 #define NAME_SIZE 200
 
 typedef struct passport {
