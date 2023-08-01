@@ -13,7 +13,9 @@ C CODE
 #include <string.h>
 #include <time.h>
 #define MAX_APPLICATION 10 
-#define NAME_SIZE 200
+//as per question, first and last name should not exceed 200 characters
+//hence, first and last name has limit of 100 each
+#define NAME_SIZE 100 
 
 typedef struct passport {
     unsigned long int id;
@@ -40,9 +42,13 @@ int main(void) {
 
     Passport *data[MAX_APPLICATION];
 
-    allocateMemory(data);
+    allocateMemory(data); //allocating memory for struct type Passport
     for(size_t a = 0; a < MAX_APPLICATION; a++) {
+
         data[a]->id = generateUniqueId(a); 
+        printf("\n----------------------------------\n");
+        printf("Enter data for ID %lu\n", data[a]->id);
+        printf("----------------------------------\n");
         getFirstNameFromApplicant(data, a);
         getLastNameFromApplicant(data, a);
         getAgeFromApplicant(data, a);
@@ -106,7 +112,8 @@ char * getString() {
     static char str[NAME_SIZE];
     unsigned int check = 0;
 
-    scanf("%199[^\n]", str);
+    //limiting each name size 99
+    scanf("%99[^\n]", str);
     clearInputBuffer();
 
     check = checkName(str);
@@ -122,8 +129,8 @@ int checkName(const char *str) {
     int checkCharacter = 0;
     int checkAlpha = 0;
 
-    if (strlen(str) < 2 || strlen(str) > 200) {
-        printf("Name should be more than one and less than 200 character\n");
+    if (strlen(str) < 2 || strlen(str) > NAME_SIZE) {
+        printf("Name should be more than one and less than 100 character\n");
         checkCharacter++;
     }
     while(*str != '\0') { //checking string until last character
@@ -145,17 +152,17 @@ void displayData(const Passport *data[]) {
 
     unsigned int serialNo = 1;
 
-    printf("%-5s%-20s%-20s%-20s%2s\n", "---", "---------", "----------", "----------", "---");
-    printf("%-5s%-20s%-20s%-20s%2s\n", "#", "ID", "First Name", "Last Name", "Age");
-    printf("%-5s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
+    printf("\n%-5s%-15s%-20s%-20s%2s\n", "---", "---------", "----------", "----------", "---");
+    printf("%-5s%-15s%-20s%-20s%2s\n", "#", "ID", "First Name", "Last Name", "Age");
+    printf("%-5s%-15s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
     for(size_t a = 0; a < MAX_APPLICATION; a++) {
-        printf("%-5d%-20lu%-20s%-20s%2u\n", serialNo++, data[a]->id,
+        printf("%-5d%-15lu%-20s%-20s%2u\n", serialNo++, data[a]->id,
                                          data[a]->firstName, 
                                          data[a]->lastName, 
                                          data[a]->age
                                          );
     }
-    printf("%-5s%-20s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
+    printf("%-5s%-15s%-20s%-20s%2s\n", "---", "----------", "----------", "----------", "---");
 }
 void freeMemory(Passport *data[]) {
 
