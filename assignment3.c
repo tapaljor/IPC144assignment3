@@ -12,7 +12,7 @@ C CODE
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#define MAX_APPLICATION 3 
+#define MAX_APPLICATION 10 
 //as per question, first and last name should not exceed 200 characters
 //hence, first and last name has limit of 100 each
 #define NAME_SIZE 100 
