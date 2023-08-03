@@ -12,7 +12,7 @@ C CODE
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#define MAX_APPLICATION 10 
+#define MAX_APPLICATION 3 
 //as per question, first and last name should not exceed 200 characters
 //hence, first and last name has limit of 100 each
 #define NAME_SIZE 100 
@@ -34,18 +34,18 @@ char * getString();
 int checkName(const char *);
 unsigned int checkAge(const unsigned int);
 void clearInputBuffer(void);
-//Function generates unique ID with help of 
-//time stamp (seconds starting from 1970-01-01 00000);
+//Function generates unique ID with help of current time (which is unique)
 unsigned long int generateUniqueId();
 
 int main(void) {
 
+    //instantiating Passport typedef to pointer data with array of 10
     Passport *data[MAX_APPLICATION];
 
     allocateMemory(data); //allocating memory for struct type Passport
     for(size_t a = 0; a < MAX_APPLICATION; a++) {
 
-        data[a]->id = generateUniqueId(a); 
+        data[a]->id = generateUniqueId(); 
         printf("\n----------------------------------\n");
         printf("Enter data for ID %lu\n", data[a]->id);
         printf("----------------------------------\n");
@@ -130,7 +130,7 @@ int checkName(const char *str) {
     int checkAlpha = 0;
 
     if (strlen(str) < 2 || strlen(str) > NAME_SIZE) {
-        printf("Name should be more than one and less than 100 character\n");
+        printf("Name should be more than one character and less than 100 character\n");
         checkCharacter++;
     }
     while(*str != '\0') { //checking string until last character
@@ -171,7 +171,10 @@ void freeMemory(Passport *data[]) {
     }
 }
 unsigned long int generateUniqueId() {
-    return (unsigned long int)time(NULL); //seconds from 1970s till now is unque
+
+    //generating random number timestamp + 0-100 to make is more unique
+    srand((unsigned long int)time(NULL));
+    return time(NULL)+rand()%91+10;
 }
 void clearInputBuffer(void) {
 
