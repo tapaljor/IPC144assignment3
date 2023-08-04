@@ -129,7 +129,7 @@ int checkName(const char *str) {
     int checkCharacter = 0;
     int checkAlpha = 0;
 
-    if (strlen(str) < 2 || strlen(str) > NAME_SIZE) {
+    if (strlen(str) < 2) {
         printf("Name should be more than one character and less than 100 character\n");
         checkCharacter++;
     }
